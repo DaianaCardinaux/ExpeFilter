@@ -1,8 +1,8 @@
 <?php
 session_start();
-require_once('/config/db.php');
-require_once('/config/Auth.php');
-require_once('/config/check.php');
+require_once('../config/db.php');
+require_once('../config/Auth.php');
+require_once('../config/check.php');
 
 $db = new Database();
 $conexion = $db->connect();
