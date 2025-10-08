@@ -1,0 +1,71 @@
+body {
+    background: rgba(15, 41, 68, 0.95);
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.containerBo {
+    display: flex;
+    justify-content: center; 
+    align-items: center;    
+    flex-direction: column; 
+    gap: 30px;               
+    margin-top: 150px;        
+}
+
+.containerBo a {
+    background-color: #f1f5f9;
+    color: #133558;          
+    border: none;
+    padding: 15px 30px;
+    font-size: 20px;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    width: 350px; 
+    font-weight: 500; 
+    text-transform: uppercase;        
+}
+
+.containerBo a:hover {
+    background-color: #c3cdda;
+    color: #265183;
+    box-shadow: 0px 4px 10px rgba(0,0,0,0.3);
+    transition: 0.5s;
+}
+
+.link:hover {
+    color:rgb(158, 177, 218) !important;
+    transition: 0.5s; 
+}
+
+.bg-oscuro td, .bg-oscuro th {
+    background-color: #2d3338 !important;
+    color: white;
+}
+
+.bg-oscuro input, .bg-oscuro select,  .bg-oscuro textarea {
+    background-color: #3f474e !important;
+    color: white;
+    border: none;
+}
+
+.bg-blue-dark {
+    background-color: rgba(39, 84, 133, 0.95);
+    color: rgb(238, 232, 232);
+}
+
+.bg-blue-dark:hover {
+    background-color: rgba(55, 104, 156, 0.95);
+    color: white;
+}
+
+.optionSelec, input::placeholder, textarea::placeholder {
+    color: #f8f9faa4 !important;
+}
+
+.row input, .row select, .card {
+    border: none !important;
+}
+
+.table th, .table td {
+    border-color: #63696e;
+}
