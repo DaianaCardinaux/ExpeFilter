@@ -5,29 +5,28 @@ class Users {
     public $conexion;
     public $data;
 
-    function __construct($conexion, $email, $password){
+    public function __construct($conexion, $email, $password){
         $this->conexion = $conexion;
         $this->email = $email;
         $this->password = $password;
         $this->data = null;
     }
 
-    //info base de datos de USUARIOS
-    function cargarUsuario(){
+    public function cargarUsuario(){
         $stmt = $this->conexion->prepare("SELECT id, email, password_hash, rol, nombre FROM usuarios WHERE email = :email");
         $stmt->execute([":email" => $this->email]);
         $this->data = $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
 
-    function verificar(){
+    public function verificar(){
         if (!$this->data) {
             return false;
         }
         return password_verify($this->password, $this->data['password_hash']);
     }
 
-    function redirigir(){
+    public function redirigir(){
         session_regenerate_id(true);
         $_SESSION['id'] = $this->data['id'];
         $_SESSION['nombre'] = $this->data['nombre'] ?? '';
@@ -37,7 +36,7 @@ class Users {
         if ($this->data['rol'] === 'admin') {
             header("Location: /public/users/admin.php");
         } else {
-            header("Location: /public/users/usuario.php");
+            header("Location: /public/users/usuarios.php");
         }
         exit;
     }

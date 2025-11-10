@@ -75,10 +75,8 @@ $error = "";
         </div>
         </div>
     </div>
+        <div class="correos">
+            admin@demo.local / Admin123! • usuario@demo.local / User123!
+        </div>
 </body>
-
-    <!-- <div class="helper" style="margin-top:10px; color:white">
-        admin@demo.local / Admin123! • usuario@demo.local / User123!
-        admin@agregado.com / adminAgregado!
-    </div> -->
 </html>

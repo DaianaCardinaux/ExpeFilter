@@ -13,13 +13,9 @@ $conexion = $db->connect();
 
 $expedientes = new Expedientes($conexion);
 
-$id = $_GET['id'];
-$datos = $expedientes->buscar(['id' => $id]);
-$datoExpediente = $datos[0];
-
 $mensaje = '';
 
-if (isset($_POST['boton-actualizar'])) {
+if (isset($_POST['boton-agregar'])) {
     $numero = $_POST['numero'];
     $anio = $_POST['anio'];
     $sector_id = $_POST['sector_id'];
@@ -27,14 +23,16 @@ if (isset($_POST['boton-actualizar'])) {
     $estado_id = $_POST['estado_id'];
     $asunto = $_POST['asunto'];
 
-    $actualizado = $expedientes->actualizarExpediente($id, $numero, $anio, $sector_id, $tipo_id, $estado_id, $asunto);
-
-    if ($actualizado) {
-        $mensaje = "Expediente actualizado";
-        $datos = $expedientes->buscar(['id' => $id]);
-        $datoExpediente = $datos[0];
+    if ($numero == "" or $anio == "" or $sector_id == "" or $tipo_id == "" or $estado_id == "" or $asunto == "") {
+        $mensaje = "Ingresa los datos";
     } else {
-        $mensaje = "Datos invalidos";
+        $agregado = $expedientes->agregarExpediente($numero, $anio, $sector_id, $tipo_id, $estado_id, $asunto);
+
+        if ($agregado) {
+            $mensaje = "Expediente agregado";
+        } else {
+            $mensaje = "Ingresa los datos completos";
+        }
     }
 }
 
@@ -45,27 +43,27 @@ if (isset($_POST['boton-actualizar'])) {
 <div class="container mt-5">
     <div class="card shadow-sm bg-dark text-light">
         <div class="card-body">
-            <h4 class="card-title mb-5 text-center">Editar Expediente</h4>
+            <h4 class="card-title mb-5 text-center">Agregar Expediente Nuevo</h4>
 
             <?php if ($mensaje !== ''): ?>
-                <div class="alert alert-success"><?= $mensaje ?></div>
+                <div class="alert alert-warning"><?= $mensaje ?></div>
             <?php endif; ?>
 
             <form method="POST" class="row g-4 bg-oscuro mb-4">
                 <div class="col-2">
                     <label class="form-label">Número</label>
-                    <input type="text" name="numero" class="form-control text-light" value="<?= htmlspecialchars($datoExpediente['numero']) ?>">
+                    <input type="text" name="numero" class="form-control text-light" value="">
                 </div>
 
                 <div class="col-2">
                     <label class="form-label">Año</label>
-                    <input type="text" name="anio" class="form-control text-light" value="<?= htmlspecialchars($datoExpediente['anio']) ?>">
+                    <input type="text" name="anio" class="form-control text-light" value="">
                 </div>
 
                 <div class="col-2">
                     <label class="form-label">Tipo</label>
                         <select name="tipo_id" class="form-select">
-                            <option value="<?= htmlspecialchars($datoExpediente['tipo_id']) ?>"><?= htmlspecialchars($datoExpediente['tipo_nombre']) ?></option> 
+                            <option value=""></option> 
                             <option value="1">Licencia</option> 
                             <option value="2">Reclamo</option> 
                             <option value="3">Obra</option> 
@@ -77,7 +75,7 @@ if (isset($_POST['boton-actualizar'])) {
                 <div class="col-2">
                     <label class="form-label">Estado</label>
                         <select name="estado_id" class="form-select">
-                            <option value="<?= htmlspecialchars($datoExpediente['estado_id']) ?>"><?= htmlspecialchars($datoExpediente['estado_nombre']) ?></option> 
+                            <option value=""></option> 
                             <option value="1">En tramite</option> 
                             <option value="2">Finalizar</option> 
                             <option value="3">Pendiente</option> 
@@ -88,7 +86,7 @@ if (isset($_POST['boton-actualizar'])) {
                 <div class="col-3">
                     <label class="form-label">Sector</label>
                     <select name="sector_id" class="form-select">
-                        <option value="<?= htmlspecialchars($datoExpediente['sector_id']) ?>"><?= htmlspecialchars($datoExpediente['sector_nombre']) ?></option> 
+                        <option value=""></option> 
                         <option value="1">Mesa de Entradas</option> 
                         <option value="2">Comercio</option> 
                         <option value="3">Obras Públicas</option> 
@@ -99,11 +97,11 @@ if (isset($_POST['boton-actualizar'])) {
 
                 <div class="col-12">
                     <label class="form-label">Asunto</label>
-                    <textarea name="asunto" class="form-control text-light" rows="4"><?= htmlspecialchars($datoExpediente['asunto']) ?></textarea>
+                    <textarea name="asunto" class="form-control text-light" rows="4"></textarea>
                 </div>
 
                 <div class="col-12">
-                    <button type="submit" name="boton-actualizar" class="btn bg-blue-dark">Actualizar Expediente</button>
+                    <button type="submit" name="boton-agregar" class="btn bg-blue-dark">Agregar Expediente</button>
                     <a href="./buscar_expediente.php" class="btn btn-secondary">Volver</a>
                 </div>
             </form>

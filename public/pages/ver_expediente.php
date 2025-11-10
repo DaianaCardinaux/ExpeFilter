@@ -1,5 +1,7 @@
-<?php 
+<?php
 session_start();
+
+require('../../lib/fpdf.php');
 require_once('../../config/db.php'); 
 require_once('../../config/Expedientes.php');   
 
@@ -10,34 +12,63 @@ if (!isset($_SESSION['id'])) {
 
 $db = new Database();
 $conexion = $db->connect();
-
 $expedientes = new Expedientes($conexion);
 
 $id = $_GET['id'];
 $datoExpediente = $expedientes->buscar(['id' => $id]);
 
-?>
+// $pdf->SetFont(familia, estilo, tamaño)
+// $pdf->Cell(ancho, alto, texto, borde, salto, alineacion, relleno, link)
 
-<?php include '../views/header.php'; ?>
+foreach ($datoExpediente as $exp){ 
+    $pdf = new FPDF();
+    $pdf->AddPage();
 
-<div class="container mt-5">
-    <div class="card mb-4 shadow-sm bg-dark text-light">
-        <div class="card-body">
-            <?php foreach ($datoExpediente as $exp){ ?>
-                <h4 class="card-title mb-4 text-center">Datos del Expediente</h4>
-                    <p><strong>Número:</strong> <?= htmlspecialchars($exp['numero']) ?></p>
-                    <p><strong>Año:</strong> <?= htmlspecialchars($exp['anio']) ?></p>
-                    <p><strong>Sector:</strong> <?= htmlspecialchars($exp['sector_nombre']) ?></p>
-                    <p><strong>Tipo:</strong> <?= htmlspecialchars($exp['tipo_nombre']) ?></p>
-                    <p><strong>Estado:</strong> <?= htmlspecialchars($exp['estado_nombre']) ?></p>
-                    <p><strong>Asunto:</strong> <?= htmlspecialchars($exp['asunto']) ?></p>
-                    <p><strong>Creado en:</strong> <?= htmlspecialchars($exp['creado_en']) ?></p>
-                    <p><strong>Actualizado en:</strong> <?= htmlspecialchars($exp['actualizado_en']) ?></p>
-            <?php } ?>
-        </div>
-    </div>
+    $pdf->image('../../assets/images/logo.png', 150, 13, 45);
 
-    <div class="col-12">
-        <a href="./buscar_expediente.php" class="btn btn-secondary">Volver</a>
-    </div>
-</div>
+    $pdf->SetFont('helvetica','B',20);
+    $pdf->Cell(80, 20, 'Datos del expediente', 0, 1, 'C');
+    $pdf->Ln(10);
+
+    $pdf->SetFont('helvetica','B',12);
+    $pdf->Cell(20, 8, 'Numero:');
+    $pdf->SetFont('helvetica', '', 13);
+    $pdf->Cell(0, 8, utf8_decode($exp['numero']), 0, 1);
+
+    $pdf->SetFont('helvetica','B',12);
+    $pdf->Cell(12, 8, utf8_decode('Año:'));
+    $pdf->SetFont('helvetica', '', 13);
+    $pdf->Cell(0, 8, utf8_decode($exp['anio']), 0, 1);
+
+    $pdf->SetFont('helvetica','B',12);
+    $pdf->Cell(17, 8, 'Sector:');
+    $pdf->SetFont('helvetica', '', 13);
+    $pdf->Cell(0, 8, utf8_decode($exp['sector_nombre']), 0, 1);
+
+    $pdf->SetFont('helvetica','B',12);
+    $pdf->Cell(12, 8, 'Tipo:');
+    $pdf->SetFont('helvetica', '', 13);
+    $pdf->Cell(0, 8, utf8_decode($exp['tipo_nombre']), 0, 1);
+
+    $pdf->SetFont('helvetica','B',12);
+    $pdf->Cell(17, 8, 'Estado:');
+    $pdf->SetFont('helvetica', '', 13);
+    $pdf->Cell(0, 8, utf8_decode($exp['estado_nombre']), 0, 1);
+
+    $pdf->SetFont('helvetica','B',12);
+    $pdf->Cell(18, 8, 'Asunto:');
+    $pdf->SetFont('helvetica', '', 13);
+    $pdf->MultiCell(0, 8, utf8_decode($exp['asunto'])); 
+
+    $pdf->SetFont('helvetica','B',12);
+    $pdf->Cell(25, 8, 'Creado en:');
+    $pdf->SetFont('helvetica', '', 13);
+    $pdf->Cell(0, 8, utf8_decode($exp['creado_en']), 0, 1);
+
+    $pdf->SetFont('helvetica','B',12);
+    $pdf->Cell(35, 8, 'Actualizado en:');
+    $pdf->SetFont('helvetica', '', 13);
+    $pdf->Cell(0, 8, utf8_decode($exp['actualizado_en']), 0, 1);
+
+    $pdf->Output();
+} ?>

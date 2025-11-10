@@ -1,16 +1,15 @@
-body {
-    margin: 0;
-    height: 650px;
+html, body {
+    flex-direction: column;
     display: flex;
-    justify-content: center;
-    align-items: center;
-    background: linear-gradient(135deg, #08111b, #0b1829, #0d1e33, #08111b);
-    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    justify-content: center;  
+    align-items: center;  
+    height: 100%; 
+    background-color: #1e293b;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-
 .login-card {
-    background: rgba(15, 41, 68, 0.95);
+    background: rgb(15, 37, 58);
     border-radius: 16px;
     overflow: hidden;
     max-width: 800px;
@@ -40,39 +39,32 @@ body {
     justify-content: center;
 }
 
-.left-panel h2, .left-panel p {
+.left-panel h2, .left-panel p, .correos {
     color: #fffff8;
 }
-
 
 .form-section {
     padding: 40px;
     display: flex;
-    justify-content: center;
-}
-
-.a {
     flex-direction: column;
+    justify-content: center;
 }
 
 .form-section h3 {
     color: #f1f5f9;
+    text-align: center;
 }
 
 .form-control {
     border-radius: 8px;
     color: #f1f5f9;
     background-color: #1e293b; 
-    border: 1px solid #334155;
+    border: 1px solid #40536e;
     box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.164);
 }
 
 .form-control::placeholder {
     color: #94a3b8; 
-}
-
-.form-control:active{
-    transition: 0.5s;
 }
 
 .btn-primary {
@@ -93,10 +85,12 @@ body {
     background-color: #242f3f;
 }
 
-.tituloAdmin {
-    color:#fffff8;
-}
-
 .alert-danger {
     text-align: center;
+}
+
+.correos {
+    margin-top: 20px;
+    text-align: center;
+    opacity: 0.8;
 }

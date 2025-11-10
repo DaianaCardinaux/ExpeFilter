@@ -11,6 +11,7 @@ class Database {
             $dsn = "mysql:host=$this->host;dbname=$this->db";
             $pdo = new PDO($dsn, $this->user, $this->pass);
             $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            $pdo->exec("SET NAMES 'utf8mb4'"); 
             return $pdo;
         } catch (PDOException $e) {
             die("Error en la conexión: " . $e->getMessage());

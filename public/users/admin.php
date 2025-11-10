@@ -12,7 +12,7 @@ if (!isset($_SESSION['id'])) {
 
 <div class="containerBo">
     <a href="../pages/agregar_usuario.php" class="btn btn-light btn-lg">Agregar Usuarios</a>
-    <a href="#" class="btn btn-light btn-lg">Agregar Expedientes</a>
+    <a href="../pages/agregar_expediente.php" class="btn btn-light btn-lg">Agregar Expedientes</a>
     <a href="../pages/buscar_expediente.php" class="btn btn-light btn-lg">Ver Expedientes</a>
 </div>
 

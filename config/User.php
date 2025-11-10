@@ -2,17 +2,16 @@
     class Usuarios {
         public $conexion;
 
-        function __construct($conexion){
+        public function __construct($conexion){
             $this->conexion = $conexion;
         }
 
-        function obtenerUsuarios(){
+        public function obtenerUsuarios(){
             $stmt = $this->conexion->query("SELECT id, nombre, email, rol, creado_en FROM usuarios");
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
         }
 
-        function crearUsuarios($nombre, $email, $password, $rol = 'usuario'){
-    
+        public function crearUsuarios($nombre, $email, $password, $rol = 'usuario'){
             $stmt = $this->conexion->prepare("SELECT COUNT(*) FROM usuarios WHERE email = :eml");
             $stmt->execute([":eml" => $email]);
             $existe = $stmt->fetchColumn();
