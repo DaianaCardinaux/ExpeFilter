@@ -17,8 +17,6 @@ $expedientes = new Expedientes($conexion);
 $id = $_GET['id'];
 $datoExpediente = $expedientes->buscar(['id' => $id]);
 
-// $pdf->SetFont(familia, estilo, tamaño)
-// $pdf->Cell(ancho, alto, texto, borde, salto, alineacion, relleno, link)
 
 foreach ($datoExpediente as $exp){ 
     $pdf = new FPDF();
