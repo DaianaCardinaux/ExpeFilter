@@ -18,7 +18,6 @@ class Users {
         $this->data = $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
-
     public function verificar(){
         if (!$this->data) {
             return false;
@@ -29,7 +28,6 @@ class Users {
     public function redirigir(){
         session_regenerate_id(true);
         $_SESSION['id'] = $this->data['id'];
-        $_SESSION['nombre'] = $this->data['nombre'] ?? '';
         $_SESSION['email'] = $this->data['email'];
         $_SESSION['rol'] = $this->data['rol'];
 

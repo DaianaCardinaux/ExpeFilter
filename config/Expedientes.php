@@ -11,9 +11,6 @@ class Expedientes {
     }
 
     public function buscar($filtros = []) {
-        $this->sql = "SELECT exp.*, s.nombre AS sector_nombre, t.nombre AS tipo_nombre, e.nombre AS estado_nombre 
-                  FROM expedientes exp LEFT JOIN sectores s ON exp.sector_id = s.id LEFT JOIN tipos_expediente t ON exp.tipo_id = t.id LEFT JOIN estados e ON exp.estado_id = e.id 
-                  WHERE 1=1";
         $params = [];
 
         if (!empty($filtros['id'])) {

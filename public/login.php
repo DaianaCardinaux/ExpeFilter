@@ -31,8 +31,7 @@ $error = "";
             }
         }
     }
- 
-     ?>
+ ?>
 
 <!DOCTYPE html>
 <html lang="es">
